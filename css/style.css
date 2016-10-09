@@ -1,0 +1,75 @@
+body{
+  background: black;
+  color: white;
+  }
+h1{
+  font-family: 'Fontdiner Swanky', cursive;
+  text-align: center;
+  font-size: 54px;
+  color: rgba(85, 195, 195, 0.7)
+}
+
+#canvas{
+  border: 1px solid white;
+  margin: 0 4em;
+  display: inline;
+  float: left;
+}
+#info{
+  float: left;
+  display: inline;
+  clear: both;
+  padding: 10px;
+  color: white;
+  font-family: 'Audiowide', cursive;
+}
+#startGame{
+   border-radius: 5px;
+   font-size: 22px;
+   font-family: 'Stalinist One', cursive;
+   margin: 20px;
+}
+#enterName{
+   border-radius: 5px;
+   font-size: 12px;
+   font-family: 'Stalinist One', cursive;
+   margin-left: 10px;
+}
+#nameField{
+  font-family: 'Fontdiner Swanky', cursive;
+  color: black;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 10px;
+}
+ul{
+  margin-top: 60px;
+}
+li{
+  padding: 10px;
+}
+li:hover, #startGame:hover, h2, #enterName:hover{
+  color: #ee5f3c;
+}
+#gameTracker{
+  float: left;
+  display: inline;
+  margin-top: 50px;
+  color: #ee5f3c;
+  font-family: 'Audiowide', cursive;
+  font-size: 18px;
+}
+#score{
+  font-size: 26px;
+  border: 1px solid;
+}
+
+/* .clearfix:after {
+        visibility: hidden;
+        display: block;
+        content: " ";
+        clear: both;
+        height: 0;
+        font-size: 0;
+}
+ */
