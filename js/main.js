@@ -1,15 +1,26 @@
-console.log('sup')
+console.log('yup')
+
+//jQuery capturing Player's Name
+$('#enterName').on('click', function(){
+  // e.preventDefault()
+  var newPlayer = $('#nameField').val()
+  $('<h3>', {html: newPlayer}).appendTo('#name')
+  $('#nameField').val('')
+})
+
+
+
 //Canvas
-var canvas = document.getElementById("canvas")
-var ctx = canvas.getContext("2d")
-var ctx2 = canvas.getContext("2d")
-var gradient = ctx.createLinearGradient(100, 80, 170, 0)
-gradient.addColorStop("0", "turquoise")
-gradient.addColorStop("0.5", "blue")
-gradient.addColorStop("1.0", "red")
-ctx.strokeStyle = gradient
-ctx.lineWidth = 2
-ctx.fillStyle = gradient
+  var canvas = document.getElementById("canvas")
+  var ctx = canvas.getContext("2d")
+  var ctx2 = canvas.getContext("2d")
+  var gradient = ctx.createLinearGradient(100, 80, 170, 0)
+  gradient.addColorStop("0", "turquoise")
+  gradient.addColorStop("0.5", "blue")
+  gradient.addColorStop("1.0", "red")
+  ctx.strokeStyle = gradient
+  ctx.lineWidth = 2
+  ctx.fillStyle = gradient
 
 //Study if I have time to redoit
 // ctx.beginPath()
@@ -19,7 +30,7 @@ ctx.fillStyle = gradient
 //     ctx.closePath()
 //     ctx.stroke()
 
-function pins(){
+function drawPins(){
   //pin1
   ctx.beginPath()
   ctx.moveTo(150,40)
@@ -110,7 +121,7 @@ function pins(){
   ctx.stroke()
   ctx.fill()
 }
-pins()
+drawPins()
 
 //Ball
 var ball = {
@@ -128,11 +139,3 @@ var ball = {
   }
 }
 ball.draw()
-
-//jQuery capturing Player's Name
-// $('#enterName').on('click', function(){
-//   var newPlayer = $('#nameField').val()
-//   console.log('aqui')
-//   $('<h3 />', {text: newPlayer.appendTo('div#name')})
-//   $('#nameField').val(' ')
-// })

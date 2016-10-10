@@ -8,6 +8,9 @@ h1{
   font-size: 54px;
   color: rgba(85, 195, 195, 0.7)
 }
+h3{
+  color: white;
+}
 
 #canvas{
   border: 1px solid white;
@@ -47,6 +50,7 @@ ul{
 }
 li{
   padding: 10px;
+  list-style-type: circle;
 }
 li:hover, #startGame:hover, h2, #enterName:hover{
   color: #ee5f3c;

@@ -5,16 +5,20 @@
     <title>BowLinck</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Audiowide|Butcherman|Corben:700|Faster+One|Fontdiner+Swanky|Stalinist+One" rel="stylesheet">
+
+    <!-- <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script> -->
+
+
     <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
-    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+
+
   </head>
 
   <body>
     <h1>BowLinck</h1>
 <div id="info">
-      <form>
         <h2>Player:</h2>
-        <input id = "nameField" type="text" /><br />
+        <input id = "nameField" type="text"><br />
         <button id="enterName">Enter Name</button>
         <ul> <h2>Choose Level:</h2>
           <li id = "easy" class = "levelsList">Easy Chicken (6 Shoots)</li>
@@ -22,7 +26,6 @@
           <li id = "advanced" class = "levelsList">Advanced Bragger (4 Shoots)</li>
         </ul>
           <button id = "startGame">Start Game</button>
-      </form>
     </div>
 
    <canvas id = "canvas" width="500" height="550"></canvas>
@@ -32,6 +35,7 @@
       <div id="shoots" class = "trackerBoard"> <h2>Shoots Left:</h2> </div>
       <div id="score" class = "trackerBoard"> <h2>Score:</h2> </div>
     </div>
+
 
     <script src="js/main.js"></script>
   </body>
