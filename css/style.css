@@ -10,8 +10,11 @@ h1{
 }
 h3{
   color: white;
+  text-align: center;
 }
-
+.levelGameTracker{
+  list-style-type: none;
+}
 #canvas{
   border: 1px solid white;
   margin: 0 4em;
@@ -58,13 +61,12 @@ li:hover, #startGame:hover, h2, #enterName:hover{
 #gameTracker{
   float: left;
   display: inline;
-  margin-top: 50px;
   color: #ee5f3c;
   font-family: 'Audiowide', cursive;
   font-size: 18px;
 }
 #score{
-  font-size: 26px;
+  font-size: 22px;
   border: 1px solid;
 }
 
