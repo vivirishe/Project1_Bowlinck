@@ -16,8 +16,14 @@ var score = 0
 //var shootsLeft = 0
 //setting number of shootsLeft and setting score to 0
 $('#easy').on('click', function(){
-  selectLevel = $('#easy').val(level).addClass('levelGameTracker')
-  $('<h3 />', {html: selectLevel}).appendTo('#level')
+  //selectLevel = $('#easy').val(level).addClass('levelGameTracker')
+  selectLevel = $('#easy').text()
+  if($('#level').children().length > 1){
+    $('#level').children().eq(1).html(selectLevel)
+  }else{
+
+    $('<h3 />', {html: selectLevel}).appendTo('#level')
+  }
   shootsLeft = 6
   $('<h3>', {html: shootsLeft}).appendTo('#shoots')
   score = 0
@@ -26,8 +32,13 @@ $('#easy').on('click', function(){
 })
 
 $('#medium').on('click', function(){
-  selectLevel = $('#medium').val(level).addClass('levelGameTracker')
-  $('<h3 />', {html: selectLevel}).appendTo('#level')
+  selectLevel = $('#medium').text()
+  if($('#level').children().length > 1){
+    $('#level').children().eq(1).html(selectLevel)
+  }else{
+
+    $('<h3 />', {html: selectLevel}).appendTo('#level')
+  }
   shootsLeft = 5
   $('<h3>', {html: shootsLeft}).appendTo('#shoots')
   score = 0
@@ -36,8 +47,13 @@ $('#medium').on('click', function(){
 })
 
 $('#advanced').on('click', function(){
-  selectLevel = $('#advanced').val(level).addClass('levelGameTracker')
-  $('<h3 />', {html: selectLevel}).appendTo('#level')
+  selectLevel = $('#advanced').text()
+  if($('#level').children().length > 1){
+    $('#level').children().eq(1).html(selectLevel)
+  }else{
+
+    $('<h3 />', {html: selectLevel}).appendTo('#level')
+  }
   shootsLeft = 4
   $('<h3>', {html: shootsLeft}).appendTo('#shoots')
   score = 0
@@ -67,8 +83,37 @@ $('#advanced').on('click', function(){
   var dx = 0
   var dy = -3
  //moving indicators (left and right)
-  var rightPressed = false;
-  var leftPressed = false;
+  var rightPressed = false
+  var leftPressed = false
+  var upPressed = false
+var pin1
+var pin2
+var pin3
+var pin4
+var pin5
+var pin6
+var pin7
+var pin8
+var pin9
+var pin10
+
+
+//startGame button
+  $('#startGame').on('click', function(){
+  $('#startGame').text('Reset')
+      //variables for Pins
+     pin1 = true
+     pin2 = true
+     pin3 = true
+     pin4 = true
+     pin5 = true
+     pin6 = true
+     pin7 = true
+     pin8 = true
+     pin9 = true
+     pin10 = true
+
+  })
 
   //Ball
   function drawBall(){
@@ -91,24 +136,30 @@ $('#advanced').on('click', function(){
   function drawPins(){
 
     ctx.fillStyle = gradient
-    //pin1
-    ctx.beginPath()
-    ctx.moveTo(150,40)
-    ctx.lineTo(180,80)
-    ctx.lineTo(120,80)
-    ctx.lineTo(150,40)
-    ctx.stroke()
-    ctx.fill()
+    if (pin1 === true) {
+      //pin1
+      ctx.beginPath()
+      ctx.moveTo(150,40)
+      ctx.lineTo(180,80)
+      ctx.lineTo(120,80)
+      ctx.lineTo(150,40)
+      ctx.stroke()
+      ctx.fill()
+      ctx.closePath()
 
-    //pin2
-    ctx.beginPath()
-    ctx.moveTo(215,40)
-    ctx.lineTo(245,80)
-    ctx.lineTo(185,80)
-    ctx.lineTo(215,40)
-    ctx.stroke()
-    ctx.fill()
-
+    }
+    if (pin2 === true) {
+      //pin2
+      ctx.beginPath()
+      ctx.moveTo(215,40)
+      ctx.lineTo(245,80)
+      ctx.lineTo(185,80)
+      ctx.lineTo(215,40)
+      ctx.stroke()
+      ctx.fill()
+      ctx.closePath()
+  }
+  if (pin3 === true) {
     //pin3
     ctx.beginPath()
     ctx.moveTo(280,40)
@@ -117,7 +168,10 @@ $('#advanced').on('click', function(){
     ctx.lineTo(280,40)
     ctx.stroke()
     ctx.fill()
+    ctx.closePath()
+  }
 
+  if (pin4 === true) {
     //pin4
     ctx.beginPath()
     ctx.moveTo(345,40)
@@ -126,7 +180,10 @@ $('#advanced').on('click', function(){
     ctx.lineTo(345,40)
     ctx.stroke()
     ctx.fill()
+    ctx.closePath()
+  }
 
+  if (pin5 === true) {
     //pin5
     ctx.beginPath()
     ctx.moveTo(180,85)
@@ -135,7 +192,10 @@ $('#advanced').on('click', function(){
     ctx.lineTo(180,85)
     ctx.stroke()
     ctx.fill()
+    ctx.closePath()
 
+  }
+  if (pin6 === true) {
     //pin6
     ctx.beginPath()
     ctx.moveTo(245,85)
@@ -144,7 +204,10 @@ $('#advanced').on('click', function(){
     ctx.lineTo(245,85)
     ctx.stroke()
     ctx.fill()
+    ctx.closePath()
 
+  }
+  if (pin7 === true) {
     //pin7
     ctx.beginPath()
     ctx.moveTo(310,85)
@@ -153,7 +216,10 @@ $('#advanced').on('click', function(){
     ctx.lineTo(310,85)
     ctx.stroke()
     ctx.fill()
+    ctx.closePath()
 
+  }
+  if (pin8 === true) {
     //pin8
     ctx.beginPath()
     ctx.moveTo(210,130)
@@ -162,7 +228,10 @@ $('#advanced').on('click', function(){
     ctx.lineTo(210,130)
     ctx.stroke()
     ctx.fill()
+    ctx.closePath()
 
+  }
+  if(pin9 === true){
     //pin9
     ctx.beginPath()
     ctx.moveTo(275,130)
@@ -171,6 +240,10 @@ $('#advanced').on('click', function(){
     ctx.lineTo(275,130)
     ctx.stroke()
     ctx.fill()
+    ctx.closePath()
+
+  }
+  if(pin10 === true){
 
     //pin10
     ctx.beginPath()
@@ -180,15 +253,51 @@ $('#advanced').on('click', function(){
     ctx.lineTo(245,175)
     ctx.stroke()
     ctx.fill()
+    ctx.closePath()
   }
+}
 
   function draw(){
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     drawPins()
     drawBall()
+    if(rightPressed){
+      x += 3
+    }else if (leftPressed) {
+      x -= 3
+    }else if (upPressed) {
+      y += dy
+      if(y > 150 && y < 200){
 
+      }
+    }
 
-    x += dx
-    y += dy
-  }
+}
+  document.addEventListener('keydown', keyDownHandler, false)
+  document.addEventListener('keyup', keyUpHandler, false)
+
   setInterval(draw, 10)
+  //para dibujar en intervalos de 10 segundos
+  //draw()
+
+  function keyDownHandler(e){
+    if(e.keyCode == 39){
+      rightPressed = true
+      }
+    else if (e.keyCode == 37) {
+      leftPressed = true
+    }else if (e.keyCode == 38) {
+      upPressed = true
+    }
+
+  }
+
+  function keyUpHandler(e){
+    if(e.keyCode == 39){
+      rightPressed = false
+    }else if (e.keyCode == 37) {
+      leftPressed = false
+    }else if (e.keyCode == 38) {
+      upPressed = false
+    }
+  }
