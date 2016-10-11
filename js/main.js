@@ -7,59 +7,78 @@ $('#enterName').on('click', function(){
   $('<h3 />', {html: newPlayer}).appendTo('#name')
   $('#nameField').val('')
 })
+//startGame button
+  $('#startGame').on('click', function(){
+
+    $('#startGame').text('Reset')
+      //variables for Pins
+     pin1 = true
+     pin2 = true
+     pin3 = true
+     pin4 = true
+     pin5 = true
+     pin6 = true
+     pin7 = true
+     pin8 = true
+     pin9 = true
+     pin10 = true
+
+  })
 
 //jQuery selecting Level
-var level
 var selectLevel = 0
 var shootsLeft = 0
 var score = 0
-//var shootsLeft = 0
+//var startResetButton = $('#startGame').text()
 //setting number of shootsLeft and setting score to 0
-$('#easy').on('click', function(){
-  //selectLevel = $('#easy').val(level).addClass('levelGameTracker')
-  selectLevel = $('#easy').text()
-  if($('#level').children().length > 1){
-    $('#level').children().eq(1).html(selectLevel)
-  }else{
+//how to compare with Start and Reset for not allowing to change level once tye game starts
+if ($('#startGame').text() === 'Start Game') {
+  $('#easy').on('click', function(){
+    //selectLevel = $('#easy').val(level).addClass('levelGameTracker')
+    shootsLeft = 6
+    score = 0
+    selectLevel = $('#easy').text()
+    if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
+      $('#level').children().eq(1).html(selectLevel)
+      $('#shoots').children().eq(1).html(shootsLeft)
+      $('#score').children().eq(1).html(score)
+    }else{
+      $('<h3 />', {html: selectLevel}).appendTo('#level')
+      $('<h3 />', {html: shootsLeft}).appendTo('#shoots')
+      $('<h3 />', {html: score}).appendTo('#score')
+    }
+  })
 
-    $('<h3 />', {html: selectLevel}).appendTo('#level')
-  }
-  shootsLeft = 6
-  $('<h3>', {html: shootsLeft}).appendTo('#shoots')
-  score = 0
-  $('<h3>', {html: score}).appendTo('#score')
-  level = ''
-})
+  $('#medium').on('click', function(){
+    score = 0
+    shootsLeft = 5
+    selectLevel = $('#medium').text()
+    if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
+      $('#level').children().eq(1).html(selectLevel)
+      $('#shoots').children().eq(1).html(shootsLeft)
+      $('#score').children().eq(1).html(score)
+    }else{
+      $('<h3 />', {html: selectLevel}).appendTo('#level')
+      $('<h3>', {html: shootsLeft}).appendTo('#shoots')
+      $('<h3>', {html: score}).appendTo('#score')
+    }
+  })
 
-$('#medium').on('click', function(){
-  selectLevel = $('#medium').text()
-  if($('#level').children().length > 1){
-    $('#level').children().eq(1).html(selectLevel)
-  }else{
-
-    $('<h3 />', {html: selectLevel}).appendTo('#level')
-  }
-  shootsLeft = 5
-  $('<h3>', {html: shootsLeft}).appendTo('#shoots')
-  score = 0
-  $('<h3>', {html: score}).appendTo('#score')
-  level = ''
-})
-
-$('#advanced').on('click', function(){
-  selectLevel = $('#advanced').text()
-  if($('#level').children().length > 1){
-    $('#level').children().eq(1).html(selectLevel)
-  }else{
-
-    $('<h3 />', {html: selectLevel}).appendTo('#level')
-  }
-  shootsLeft = 4
-  $('<h3>', {html: shootsLeft}).appendTo('#shoots')
-  score = 0
-  $('<h3>', {html: score}).appendTo('#score')
-  level = ''
-})
+  $('#advanced').on('click', function(){
+    shootsLeft = 4
+    score = 0
+    selectLevel = $('#advanced').text()
+    if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
+      $('#level').children().eq(1).html(selectLevel)
+      $('#shoots').children().eq(1).html(shootsLeft)
+      $('#score').children().eq(1).html(score)
+    }else{
+      $('<h3 />', {html: selectLevel}).appendTo('#level')
+      $('<h3>', {html: shootsLeft}).appendTo('#shoots')
+      $('<h3>', {html: score}).appendTo('#score')
+    }
+  })
+}
 //=================================================
 
 //=================================================
@@ -81,7 +100,7 @@ $('#advanced').on('click', function(){
 //x = 0 && y = -2
 //value of y it will define the velocity of the ball
   var dx = 0
-  var dy = -3
+  var dy = -1
  //moving indicators (left and right)
   var rightPressed = false
   var leftPressed = false
@@ -96,24 +115,6 @@ var pin7
 var pin8
 var pin9
 var pin10
-
-
-//startGame button
-  $('#startGame').on('click', function(){
-  $('#startGame').text('Reset')
-      //variables for Pins
-     pin1 = true
-     pin2 = true
-     pin3 = true
-     pin4 = true
-     pin5 = true
-     pin6 = true
-     pin7 = true
-     pin8 = true
-     pin9 = true
-     pin10 = true
-
-  })
 
   //Ball
   function drawBall(){
@@ -261,14 +262,13 @@ var pin10
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     drawPins()
     drawBall()
-    if(rightPressed){
+    if(rightPressed && (x < canvas.width-radius)){
       x += 3
-    }else if (leftPressed) {
+    }else if (leftPressed && (x > radius)) {
       x -= 3
     }else if (upPressed) {
-      y += dy
-      if(y > 150 && y < 200){
-
+      while(y > 215){
+        y += dy
       }
     }
 
