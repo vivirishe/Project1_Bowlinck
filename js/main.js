@@ -4,7 +4,7 @@ var startResetButton = $('#startGame').text()
 //jQuery capturing Player's Name
 $('#enterName').on('click', function(){
   // e.preventDefault()
-  var newPlayer = $('#nameField').val()
+  newPlayer = $('#nameField').val()
   $('<h3 />', {html: newPlayer}).appendTo('#name')
   $('#nameField').val('')
 })
@@ -40,6 +40,8 @@ $('#enterName').on('click', function(){
 
        x = 245
        y = 500
+       $('h3').text('')
+       $('#startGame').text('Start Game')
     }
 
   })
@@ -48,6 +50,7 @@ $('#enterName').on('click', function(){
 var selectLevel = 0
 var shootsLeft = 0
 var score = 0
+var newPlayer
 //setting number of shootsLeft and setting score to 0
 //how to compare with Start and Reset for not allowing to change level once tye game starts
 
@@ -56,14 +59,14 @@ var score = 0
     shootsLeft = 6
     selectLevel = $('#easy').text()
     if (startResetButton === "Start Game") {
-      if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
-        $('#level').children().eq(1).html(selectLevel)
-        $('#shoots').children().eq(1).html(shootsLeft)
-        $('#score').children().eq(1).html(score)
-      }else{
-        $('<h3 />', {html: selectLevel}).appendTo('#level')
-        $('<h3 />', {html: shootsLeft}).appendTo('#shoots')
-        $('<h3 />', {html: score}).appendTo('#score')
+        if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
+          $('#level').children().eq(1).html(selectLevel)
+          $('#shoots').children().eq(1).html(shootsLeft)
+          $('#score').children().eq(1).html(score)
+        }else{
+          $('<h3 />', {html: selectLevel}).appendTo('#level')
+          $('<h3 />', {html: shootsLeft}).appendTo('#shoots')
+          $('<h3 />', {html: score}).appendTo('#score')
       }
     }else {
       alert('You already chose a level')
@@ -271,68 +274,69 @@ var score = 0
   }
 }
 
+  function winLogic(){
+    score += 1
+    $('h3').eq(3).text(score)
+    shootsLeft -= 1
+    if (shootsLeft > 0) {
+      $('h3').eq(2).text(shootsLeft)
+    }else{
+      $('h3').eq(2).text(shootsLeft)
+      x = 245
+      y = 500
+      upPressed = false
+      alert('Game Over')
+      if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
+        alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!!")
+      }else {
+        alert(newPlayer + " your score is: " + score)
+      }
+    }
+    x = 245
+    y = 500
+    upPressed = false
+  }
+
   function hitPins(){
     if( pin10 && (y-radius < 215) && (x-radius >= 215 && x-radius <= 275)){
      pin10 = false
-    //  score += 1
-    //  $('h3').eq(3).text(score)
-     x = 245
-     y = 500
-     upPressed = false
+     winLogic()
     }
     if (pin9 && (y-radius < 170) && (x+radius >= 245 && x-radius <= 305)) {
       pin9 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
     if (pin8 && (y-radius < 170) && (x+radius >= 180 && x-radius <= 240)) {
       pin8 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
     if (pin7 && (y-radius < 125) && (x+radius >= 280 && x-radius <= 340)) {
       pin7 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
     if (pin6 && (y-radius < 125) && (x+radius >= 215 && x-radius <= 275)) {
       pin6 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
     if (pin5 && (y-radius < 125) && (x+radius >= 150 && x-radius <= 210)) {
       pin5 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
     if (pin4 && (y-radius < 80) && (x+radius >= 315 && x-radius <= 375)) {
       pin4 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
     if (pin3 && (y-radius < 80) && (x+radius >= 250 && x-radius <= 310)) {
       pin3 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
     if (pin2 && (y-radius < 80) && (x+radius >= 185 && x-radius <= 245)) {
       pin2 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
     if (pin1 && (y-radius < 80) && (x+radius >= 120 && x-radius <= 180)) {
       pin1 = false
-      x = 245
-      y = 500
-      upPressed = false
+      winLogic()
     }
   }
 
