@@ -1,62 +1,27 @@
 console.log('yup')
 
-var startResetButton = $('#startGame').text()
+var newPlayer
 //jQuery capturing Player's Name
 $('#enterName').on('click', function(){
-  // e.preventDefault()
   newPlayer = $('#nameField').val()
-  $('<h3 />', {html: newPlayer}).appendTo('#name')
-  $('#nameField').val('')
+  if($('#name').children().length > 1){
+    $('#name').children().eq(1).html(newPlayer)
+  }else {
+    $('<h3 />', {html: newPlayer}).appendTo('#name')
+    $('#nameField').val('')
+  }
 })
-//startGame button
-
-  $('#startGame').on('click', function(){
-    if (startResetButton === "Start Game") {
-      $('#startGame').text('Reset')
-      startResetButton = $('#startGame').text()
-      //variables for Pins
-      pin1 = true
-      pin2 = true
-      pin3 = true
-      pin4 = true
-      pin5 = true
-      pin6 = true
-      pin7 = true
-      pin8 = true
-      pin9 = true
-      pin10 = true
-
-    }else {
-      pin1 = true
-      pin2 = true
-      pin3 = true
-      pin4 = true
-      pin5 = true
-      pin6 = true
-      pin7 = true
-      pin8 = true
-      pin9 = true
-      pin10 = true
-
-       x = 245
-       y = 500
-       $('h3').text('')
-       $('#startGame').text('Start Game')
-    }
-
-  })
 
 //jQuery selecting Level
-var selectLevel = 0
+//setting number of shootsLeft and setting score to 0
+var selectLevel
 var shootsLeft = 0
 var score = 0
-var newPlayer
-//setting number of shootsLeft and setting score to 0
-//how to compare with Start and Reset for not allowing to change level once tye game starts
+
+//choosing level
 
   $('#easy').on('click', function(){
-    //selectLevel = $('#easy').val(level).addClass('levelGameTracker')
-    shootsLeft = 6
+    shootsLeft = 10
     selectLevel = $('#easy').text()
     if (startResetButton === "Start Game") {
         if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
@@ -75,7 +40,7 @@ var newPlayer
 
   $('#medium').on('click', function(){
 
-    shootsLeft = 5
+    shootsLeft = 8
     selectLevel = $('#medium').text()
     if (startResetButton === "Start Game") {
       if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
@@ -93,10 +58,9 @@ var newPlayer
   })
 
   $('#advanced').on('click', function(){
-    shootsLeft = 4
+    shootsLeft = 7
     selectLevel = $('#advanced').text()
     if (startResetButton === "Start Game") {
-
       if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
         $('#level').children().eq(1).html(selectLevel)
         $('#shoots').children().eq(1).html(shootsLeft)
@@ -111,6 +75,29 @@ var newPlayer
     }
   })
 
+  //startGame button
+  //Control of start or reset button
+  var startResetButton = $('#startGame').text()
+    $('#startGame').on('click', function(){
+      if (startResetButton === "Start Game") {
+        $('#startGame').text('Reset')
+        startResetButton = $('#startGame').text()
+        //variables for Pins
+        reloadPins()
+      }else if(startResetButton === "Reset") {
+        $('h3').text('')
+        $('#startGame').text('Start Game')
+        startResetButton = $('#startGame').text()
+        reloadPins()
+         x = 245
+         y = 500
+         upPressed = false
+         leftPressed = false
+         rightPressed = false
+         score = 0
+      }
+
+    })
 //=================================================
 
 //=================================================
@@ -124,15 +111,12 @@ var newPlayer
   ctx.strokeStyle = gradient
   ctx.lineWidth = 2
 
-
+  //ball's initial position
   var x = 245
   var y = 500
   var radius = 25
-  //moving the ball up
-//x = 0 && y = -2
-//value of y it will define the velocity of the ball
-  var dx = 0
-  var dy = -2
+//define the velocity of the ball
+  var velocity = 3
  //moving indicators (left and right)
   var rightPressed = false
   var leftPressed = false
@@ -147,7 +131,20 @@ var newPlayer
   var pin8
   var pin9
   var pin10
-  var bowlBall
+
+
+  function reloadPins(){
+    pin1 = true
+    pin2 = true
+    pin3 = true
+    pin4 = true
+    pin5 = true
+    pin6 = true
+    pin7 = true
+    pin8 = true
+    pin9 = true
+    pin10 = true
+  }
 
   //Ball
   function drawBall(){
@@ -158,7 +155,6 @@ var newPlayer
       ctx.stroke()
       ctx.closePath()
   }
-
 
   function drawPins(){
 
@@ -275,30 +271,114 @@ var newPlayer
 }
 
   function winLogic(){
-    score += 1
-    $('h3').eq(3).text(score)
-    shootsLeft -= 1
-    if (shootsLeft > 0) {
-      $('h3').eq(2).text(shootsLeft)
-    }else{
-      $('h3').eq(2).text(shootsLeft)
-      x = 245
-      y = 500
-      upPressed = false
-      alert('Game Over')
-      if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
-        alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!!")
-      }else {
+    if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
+      alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!! Your Score: " + score)
+    }else {
+      score += 2
+      $('h3').eq(3).text(score)
+      shootsLeft -= 1
+      if (shootsLeft > 0) {
+        $('h3').eq(2).text(shootsLeft)
+      }else{
+        $('h3').eq(2).text(shootsLeft)
+        x = 245
+        y = 500
+        upPressed = false
+        alert('Game Over')
         alert(newPlayer + " your score is: " + score)
-      }
     }
     x = 245
     y = 500
     upPressed = false
   }
+}
+  //   score += 1
+  //   $('h3').eq(3).text(score)
+  //   shootsLeft -= 1
+  //   if (shootsLeft > 0) {
+  //     $('h3').eq(2).text(shootsLeft)
+  //   }else{
+  //     $('h3').eq(2).text(shootsLeft)
+  //     x = 245
+  //     y = 500
+  //     upPressed = false
+  //     alert('Game Over')
+  //     if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
+  //       alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!!")
+  //     }else {
+  //       alert(newPlayer + " your score is: " + score)
+  //     }
+  //   }
+  //   x = 245
+  //   y = 500
+  //   upPressed = false
+  // }
 
+  function winIntersecLogic(){
+
+    if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
+      x = 245
+      y = 500
+      upPressed = false
+      alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!! Your Score: " + score)
+    }else {
+      score += 2
+      $('h3').eq(3).text(score)
+      shootsLeft -= 1
+      if (shootsLeft > 0) {
+        $('h3').eq(2).text(shootsLeft)
+      }else{
+        $('h3').eq(2).text(shootsLeft)
+        x = 245
+        y = 500
+        upPressed = false
+        alert('Game Over')
+        alert(newPlayer + " your score is: " + score)
+    }
+    x = 245
+    y = 500
+    upPressed = false
+  }
+}
   function hitPins(){
-    if( pin10 && (y-radius < 215) && (x-radius >= 215 && x-radius <= 275)){
+    if (y <= radius){
+      x = 245
+      y = 500
+      upPressed = false
+      shootsLeft -= 1
+      $('h3').eq(2).text(shootsLeft)
+    }
+    if(pin8 && pin9 && (y-radius < 170) && (x+radius >= 230 && x-radius <= 255)){
+      pin8 = false
+      pin9 = false
+      winIntersecLogic()
+    }
+    if(pin5 && pin6 && (y-radius < 125) && (x+radius >= 200 && x-radius <= 225)){
+      pin5 = false
+      pin6 = false
+      winIntersecLogic()
+    }
+    if(pin6 && pin7 && (y-radius < 125) && (x+radius >= 255 && x-radius <= 295)){
+      pin6 = false
+      pin7 = false
+      winIntersecLogic()
+    }
+    if(pin1 && pin2 && (y-radius < 80) && (x+radius >= 160 && x-radius <= 200)){
+      pin1 = false
+      pin2 = false
+      winIntersecLogic()
+    }
+    if(pin2 && pin3 && (y-radius < 80) && (x+radius >= 225 && x-radius <= 265)){
+      pin2 = false
+      pin3 = false
+      winIntersecLogic()
+    }
+    if(pin3 && pin4 && (y-radius < 80) && (x+radius >= 290 && x-radius <= 330)){
+      pin3 = false
+      pin4 = false
+      winIntersecLogic()
+    }
+    if( pin10 && (y-radius < 215) && (x+radius >= 215 && x-radius <= 275)){
      pin10 = false
      winLogic()
     }
@@ -338,6 +418,7 @@ var newPlayer
       pin1 = false
       winLogic()
     }
+
   }
 
   function draw(){
@@ -348,12 +429,12 @@ var newPlayer
       x += 3
     }else if (leftPressed && (x > radius)) {
       x -= 3
-    }else if (upPressed) {
+    }
+    if (upPressed) {
       // setInterval(hitPins, 40)
-      y -= 3
+      y -= velocity
       hitPins();
     }
-
 }
   document.addEventListener('keydown', keyDownHandler, false)
   document.addEventListener('keyup', keyUpHandler, false)
