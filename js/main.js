@@ -1,6 +1,6 @@
 console.log('yup')
 
-var newPlayer
+var newPlayer = 0
 //jQuery capturing Player's Name
 $('#enterName').on('click', function(){
   newPlayer = $('#nameField').val()
@@ -14,14 +14,14 @@ $('#enterName').on('click', function(){
 
 //jQuery selecting Level
 //setting number of shootsLeft and setting score to 0
-var selectLevel
+var selectLevel = 0
 var shootsLeft = 0
 var score = 0
 
 //choosing level
-
   $('#easy').on('click', function(){
     shootsLeft = 10
+    velocity = 2
     selectLevel = $('#easy').text()
     if (startResetButton === "Start Game") {
         if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
@@ -39,8 +39,8 @@ var score = 0
   })
 
   $('#medium').on('click', function(){
-
     shootsLeft = 8
+    velocity = 4
     selectLevel = $('#medium').text()
     if (startResetButton === "Start Game") {
       if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
@@ -58,7 +58,8 @@ var score = 0
   })
 
   $('#advanced').on('click', function(){
-    shootsLeft = 7
+    shootsLeft = 6
+    velocity = 5
     selectLevel = $('#advanced').text()
     if (startResetButton === "Start Game") {
       if(($('#level').children().length > 1) && ($('#shoots').children().length > 1) && ($('#score').children().length > 1)){
@@ -95,6 +96,7 @@ var score = 0
          leftPressed = false
          rightPressed = false
          score = 0
+         velocity = 0
       }
 
     })
@@ -116,7 +118,7 @@ var score = 0
   var y = 500
   var radius = 25
 //define the velocity of the ball
-  var velocity = 3
+  var velocity = 0
  //moving indicators (left and right)
   var rightPressed = false
   var leftPressed = false
@@ -348,32 +350,32 @@ var score = 0
       shootsLeft -= 1
       $('h3').eq(2).text(shootsLeft)
     }
-    if(pin8 && pin9 && (y-radius < 170) && (x+radius >= 230 && x-radius <= 255)){
+    if(pin8 && pin9 && (y-radius < 170) && (x+radius >= 235 && x-radius <= 250)){
       pin8 = false
       pin9 = false
       winIntersecLogic()
     }
-    if(pin5 && pin6 && (y-radius < 125) && (x+radius >= 200 && x-radius <= 225)){
+    if(pin5 && pin6 && (y-radius < 125) && (x+radius >= 205 && x-radius <= 220)){
       pin5 = false
       pin6 = false
       winIntersecLogic()
     }
-    if(pin6 && pin7 && (y-radius < 125) && (x+radius >= 255 && x-radius <= 295)){
+    if(pin6 && pin7 && (y-radius < 125) && (x+radius >= 270 && x-radius <= 285)){
       pin6 = false
       pin7 = false
       winIntersecLogic()
     }
-    if(pin1 && pin2 && (y-radius < 80) && (x+radius >= 160 && x-radius <= 200)){
+    if(pin1 && pin2 && (y-radius < 80) && (x+radius >= 175 && x-radius <= 190)){
       pin1 = false
       pin2 = false
       winIntersecLogic()
     }
-    if(pin2 && pin3 && (y-radius < 80) && (x+radius >= 225 && x-radius <= 265)){
+    if(pin2 && pin3 && (y-radius < 80) && (x+radius >= 240 && x-radius <= 255)){
       pin2 = false
       pin3 = false
       winIntersecLogic()
     }
-    if(pin3 && pin4 && (y-radius < 80) && (x+radius >= 290 && x-radius <= 330)){
+    if(pin3 && pin4 && (y-radius < 80) && (x+radius >= 305 && x-radius <= 320)){
       pin3 = false
       pin4 = false
       winIntersecLogic()
