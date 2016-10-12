@@ -272,11 +272,67 @@ var score = 0
 }
 
   function hitPins(){
-    if( pin10 == true && (y-radius < 215) && (x >= 215 && x <= 275)){
+    if( pin10 && (y-radius < 215) && (x-radius >= 215 && x-radius <= 275)){
      pin10 = false
+    //  score += 1
+    //  $('h3').eq(3).text(score)
      x = 245
      y = 500
      upPressed = false
+    }
+    if (pin9 && (y-radius < 170) && (x+radius >= 245 && x-radius <= 305)) {
+      pin9 = false
+      x = 245
+      y = 500
+      upPressed = false
+    }
+    if (pin8 && (y-radius < 170) && (x+radius >= 180 && x-radius <= 240)) {
+      pin8 = false
+      x = 245
+      y = 500
+      upPressed = false
+    }
+    if (pin7 && (y-radius < 125) && (x+radius >= 280 && x-radius <= 340)) {
+      pin7 = false
+      x = 245
+      y = 500
+      upPressed = false
+    }
+    if (pin6 && (y-radius < 125) && (x+radius >= 215 && x-radius <= 275)) {
+      pin6 = false
+      x = 245
+      y = 500
+      upPressed = false
+    }
+    if (pin5 && (y-radius < 125) && (x+radius >= 150 && x-radius <= 210)) {
+      pin5 = false
+      x = 245
+      y = 500
+      upPressed = false
+    }
+    if (pin4 && (y-radius < 80) && (x+radius >= 315 && x-radius <= 375)) {
+      pin4 = false
+      x = 245
+      y = 500
+      upPressed = false
+    }
+    if (pin3 && (y-radius < 80) && (x+radius >= 250 && x-radius <= 310)) {
+      pin3 = false
+      x = 245
+      y = 500
+      upPressed = false
+    }
+    if (pin2 && (y-radius < 80) && (x+radius >= 185 && x-radius <= 245)) {
+      pin2 = false
+      x = 245
+      y = 500
+      upPressed = false
+    }
+    if (pin1 && (y-radius < 80) && (x+radius >= 120 && x-radius <= 180)) {
+      pin1 = false
+      x = 245
+      y = 500
+      upPressed = false
     }
   }
 
