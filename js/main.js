@@ -1,5 +1,7 @@
 console.log('yup')
 
+//First Step
+//Filling information
 var newPlayer = 0
 //jQuery capturing Player's Name
 $('#enterName').on('click', function(){
@@ -18,7 +20,9 @@ var selectLevel = 0
 var shootsLeft = 0
 var score = 0
 
-//choosing level
+//CHOOSING LEVEL
+//If you click on level easy, it will set the number of shoots that you have which is 10 and it will set the velocity of the ball to slow
+//It adds all the information to the score board to the right, once you already clicked on "startGame" it blocks the option to change the level with an alert
   $('#easy').on('click', function(){
     shootsLeft = 10
     velocity = 2
@@ -38,6 +42,8 @@ var score = 0
     }
   })
 
+  //If you click on level medium, it will set the number of shoots that you have which is 8 and it will set the velocity of the ball to regular
+  //It adds all the information to the score board to the right, once you already clicked on "startGame" it blocks the option to change the level with an alert
   $('#medium').on('click', function(){
     shootsLeft = 8
     velocity = 4
@@ -57,6 +63,8 @@ var score = 0
     }
   })
 
+  //If you click on level advanced, it will set the number of shoots that you have which is 6 and it will set the velocity of the ball to fast
+  //It adds all the information to the score board to the right, once you already clicked on "startGame" it blocks the option to change the level with an alert
   $('#advanced').on('click', function(){
     shootsLeft = 6
     velocity = 5
@@ -79,27 +87,35 @@ var score = 0
   //startGame button
   //Control of start or reset button
   var startResetButton = $('#startGame').text()
+
     $('#startGame').on('click', function(){
       if (startResetButton === "Start Game") {
-        $('#startGame').text('Reset')
-        startResetButton = $('#startGame').text()
-        //variables for Pins
-        reloadPins()
+        if (newPlayer == 0 || selectLevel == 0) {
+          alert('You Must Enter your Name and Select a Level')
+        }else{
+          $('#startGame').text('Reset')
+          startResetButton = $('#startGame').text()
+          //variables for Pins
+          reloadPins()
+        }
       }else if(startResetButton === "Reset") {
-        $('h3').text('')
+        $('h3').eq(1).text('')
+        $('h3').eq(2).text('')
+        $('h3').eq(3).text('')
         $('#startGame').text('Start Game')
         startResetButton = $('#startGame').text()
-        reloadPins()
-         x = 245
-         y = 500
-         upPressed = false
-         leftPressed = false
-         rightPressed = false
-         score = 0
-         velocity = 0
+        //reloadPins()
+        x = 245
+        y = 500
+        upPressed = false
+        leftPressed = false
+        rightPressed = false
+        score = 0
+        velocity = 0
+        alert('Enter your name and choose a Level')
       }
-
     })
+
 //=================================================
 
 //=================================================
@@ -117,12 +133,13 @@ var score = 0
   var x = 245
   var y = 500
   var radius = 25
-//define the velocity of the ball
+//variable to define ball's velocity
   var velocity = 0
  //moving indicators (left and right)
   var rightPressed = false
   var leftPressed = false
   var upPressed = false
+  var bowlingBall = true
   var pin1
   var pin2
   var pin3
@@ -146,16 +163,19 @@ var score = 0
     pin8 = true
     pin9 = true
     pin10 = true
+    bowlingBall = true
   }
 
   //Ball
   function drawBall(){
+    if (bowlingBall) {
       ctx.beginPath()
       ctx.arc(x, y, radius, 0,2*Math.PI)
       ctx.fillStyle = 'blue'
       ctx.fill()
       ctx.stroke()
       ctx.closePath()
+    }
   }
 
   function drawPins(){
@@ -271,12 +291,12 @@ var score = 0
     ctx.closePath()
   }
 }
-
   function winLogic(){
     if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
-      alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!! Your Score: " + score)
+      alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!! Your Score is: " + score)
+      bowlingBall = false
     }else {
-      score += 2
+      score += 1
       $('h3').eq(3).text(score)
       shootsLeft -= 1
       if (shootsLeft > 0) {
@@ -288,41 +308,20 @@ var score = 0
         upPressed = false
         alert('Game Over')
         alert(newPlayer + " your score is: " + score)
+        bowlingBall = false
     }
     x = 245
     y = 500
     upPressed = false
   }
 }
-  //   score += 1
-  //   $('h3').eq(3).text(score)
-  //   shootsLeft -= 1
-  //   if (shootsLeft > 0) {
-  //     $('h3').eq(2).text(shootsLeft)
-  //   }else{
-  //     $('h3').eq(2).text(shootsLeft)
-  //     x = 245
-  //     y = 500
-  //     upPressed = false
-  //     alert('Game Over')
-  //     if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
-  //       alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!!")
-  //     }else {
-  //       alert(newPlayer + " your score is: " + score)
-  //     }
-  //   }
-  //   x = 245
-  //   y = 500
-  //   upPressed = false
-  // }
-
   function winIntersecLogic(){
-
     if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
       x = 245
       y = 500
       upPressed = false
-      alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!! Your Score: " + score)
+      alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!! Your Score is: " + score)
+      bowlingBall = false
     }else {
       score += 2
       $('h3').eq(3).text(score)
@@ -336,6 +335,7 @@ var score = 0
         upPressed = false
         alert('Game Over')
         alert(newPlayer + " your score is: " + score)
+        bowlingBall = false
     }
     x = 245
     y = 500
@@ -344,11 +344,7 @@ var score = 0
 }
   function hitPins(){
     if (y <= radius){
-      x = 245
-      y = 500
-      upPressed = false
-      shootsLeft -= 1
-      $('h3').eq(2).text(shootsLeft)
+      winLogic()
     }
     if(pin8 && pin9 && (y-radius < 170) && (x+radius >= 235 && x-radius <= 250)){
       pin8 = false
@@ -420,30 +416,28 @@ var score = 0
       pin1 = false
       winLogic()
     }
-
   }
 
   function draw(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    drawPins()
-    drawBall()
-    if(rightPressed && (x < canvas.width-radius)){
-      x += 3
-    }else if (leftPressed && (x > radius)) {
-      x -= 3
-    }
-    if (upPressed) {
-      // setInterval(hitPins, 40)
-      y -= velocity
-      hitPins();
-    }
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      drawPins()
+      drawBall()
+      if(rightPressed && (x < canvas.width-radius)){
+        x += 3
+      }else if (leftPressed && (x > radius)) {
+        x -= 3
+      }
+      if (upPressed) {
+        // setInterval(hitPins, 40)
+        y -= velocity
+        hitPins();
+      }
 }
   document.addEventListener('keydown', keyDownHandler, false)
   document.addEventListener('keyup', keyUpHandler, false)
 
+//para dibujar en intervalos de 10 segundos
   setInterval(draw, 10)
-  //para dibujar en intervalos de 10 segundos
-  //draw()
 
   function keyDownHandler(e){
     if(e.keyCode == 39){
@@ -454,7 +448,6 @@ var score = 0
     }else if (e.keyCode == 38) {
       upPressed = true
     }
-
   }
 
   function keyUpHandler(e){
