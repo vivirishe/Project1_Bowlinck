@@ -17,13 +17,10 @@ This game is a version of digital Bowling, where you can move the ball to the ri
 - Play on your browser! [Go to Bowlinck](https://vivirishe.github.io/Project1_Bowlinck/)
 
 - Download Instructions:
-	- Step 1: Open terminal
 
-	- Step 2: Clone the project from GitHub (git clone git@github.com:vivirishe/Project1_Bowlinck.git)
+	- Step 1: Clone the repository.
 
-	- Step 3: Go into the directory (cd Project1_Bowlinck)
-
-	- Step 4: Open the files with a text editor (Ex: atom .)
+	- Step 3: Open index.html in your browser.
 
 ###Approach Taken <br>
 In this project, I used Canvas technology from HTML5, which it was something new, I had the chance to explore and play with it, I used it to draw the board and all the components (10 pins and the bowling ball). I used JavaScript for the win logic, jQuery for all the events and the DOM and CSS for the styling.

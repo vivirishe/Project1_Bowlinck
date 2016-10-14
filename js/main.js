@@ -473,7 +473,6 @@ function bowlingSound(){
     }else if (e.keyCode == 38) {
       upPressed = true
     }
-
   }
 
   function keyUpHandler(e){
