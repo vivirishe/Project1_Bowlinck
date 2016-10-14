@@ -20,6 +20,7 @@ var selectLevel = 0
 var shootsLeft = 0
 var score = 0
 
+
 //CHOOSING LEVEL
 //If you click on level easy, it will set the number of shoots that you have which is 10 and it will set the velocity of the ball to slow
 //It adds all the information to the score board to the right, once you already clicked on "startGame" it blocks the option to change the level with an alert
@@ -120,7 +121,7 @@ var score = 0
 
 //=================================================
 //Canvas
-  var canvas = document.getElementById("canvas")
+  var canvas = $('#canvas')[0]
   var ctx = canvas.getContext("2d")
   var gradient = ctx.createLinearGradient(100, 80, 170, 0)
   gradient.addColorStop("0", "turquoise")
@@ -291,8 +292,14 @@ var score = 0
     ctx.closePath()
   }
 }
+function bowlingSound(){
+    $('body').append('<audio autoplay="source"><source src="assets/bowling2.mp3" type="audio/mp3"></audio>')
+}
   function winLogic(){
     if(pin1 == false && pin2 == false && pin3 == false && pin4 == false && pin5 == false && pin6 == false && pin7 == false && pin8 == false && pin9 == false && pin10 == false){
+      x = 245
+      y = 500
+      upPressed = false
       alert(newPlayer + " you're a Bada$$, you killed all the pins, Congrats!! Your Score is: " + score)
       bowlingBall = false
     }else {
@@ -344,75 +351,92 @@ var score = 0
 }
   function hitPins(){
     if (y <= radius){
+      $('body').append('<audio autoplay="source"><source src="assets/bottleopen2.mp3" type="audio/mp3"></audio>')
       winLogic()
     }
     if(pin8 && pin9 && (y-radius < 170) && (x+radius >= 235 && x-radius <= 250)){
+      bowlingSound()
       pin8 = false
       pin9 = false
       winIntersecLogic()
     }
     if(pin5 && pin6 && (y-radius < 125) && (x+radius >= 205 && x-radius <= 220)){
+      bowlingSound()
       pin5 = false
       pin6 = false
       winIntersecLogic()
     }
     if(pin6 && pin7 && (y-radius < 125) && (x+radius >= 270 && x-radius <= 285)){
+      bowlingSound()
       pin6 = false
       pin7 = false
       winIntersecLogic()
     }
     if(pin1 && pin2 && (y-radius < 80) && (x+radius >= 175 && x-radius <= 190)){
+      bowlingSound()
       pin1 = false
       pin2 = false
       winIntersecLogic()
     }
     if(pin2 && pin3 && (y-radius < 80) && (x+radius >= 240 && x-radius <= 255)){
+      bowlingSound()
       pin2 = false
       pin3 = false
       winIntersecLogic()
     }
     if(pin3 && pin4 && (y-radius < 80) && (x+radius >= 305 && x-radius <= 320)){
+      bowlingSound()
       pin3 = false
       pin4 = false
       winIntersecLogic()
     }
     if( pin10 && (y-radius < 215) && (x+radius >= 215 && x-radius <= 275)){
+     bowlingSound()
      pin10 = false
      winLogic()
     }
     if (pin9 && (y-radius < 170) && (x+radius >= 245 && x-radius <= 305)) {
+      bowlingSound()
       pin9 = false
       winLogic()
     }
     if (pin8 && (y-radius < 170) && (x+radius >= 180 && x-radius <= 240)) {
+      bowlingSound()
       pin8 = false
       winLogic()
     }
     if (pin7 && (y-radius < 125) && (x+radius >= 280 && x-radius <= 340)) {
+      bowlingSound()
       pin7 = false
       winLogic()
     }
     if (pin6 && (y-radius < 125) && (x+radius >= 215 && x-radius <= 275)) {
+      bowlingSound()
       pin6 = false
       winLogic()
     }
     if (pin5 && (y-radius < 125) && (x+radius >= 150 && x-radius <= 210)) {
+      bowlingSound()
       pin5 = false
       winLogic()
     }
     if (pin4 && (y-radius < 80) && (x+radius >= 315 && x-radius <= 375)) {
+      bowlingSound()
       pin4 = false
       winLogic()
     }
     if (pin3 && (y-radius < 80) && (x+radius >= 250 && x-radius <= 310)) {
+      bowlingSound()
       pin3 = false
       winLogic()
     }
     if (pin2 && (y-radius < 80) && (x+radius >= 185 && x-radius <= 245)) {
+      bowlingSound()
       pin2 = false
       winLogic()
     }
     if (pin1 && (y-radius < 80) && (x+radius >= 120 && x-radius <= 180)) {
+      bowlingSound()
       pin1 = false
       winLogic()
     }
@@ -433,11 +457,12 @@ var score = 0
         hitPins();
       }
 }
-  document.addEventListener('keydown', keyDownHandler, false)
-  document.addEventListener('keyup', keyUpHandler, false)
 
-//para dibujar en intervalos de 10 segundos
+  $(document).keydown(keyDownHandler);
+  $(document).keyup(keyUpHandler);
+
   setInterval(draw, 10)
+  //para dibujar en intervalos de 10 segundos
 
   function keyDownHandler(e){
     if(e.keyCode == 39){
@@ -448,6 +473,7 @@ var score = 0
     }else if (e.keyCode == 38) {
       upPressed = true
     }
+
   }
 
   function keyUpHandler(e){
