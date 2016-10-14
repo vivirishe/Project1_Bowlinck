@@ -70,7 +70,16 @@ li:hover, #startGame:hover, h2, #enterName:hover{
   font-size: 22px;
   border: 1px solid;
 }
-
+#instructions{
+  display: block;
+  float: none;
+  clear: both;
+    font-family: 'Audiowide', cursive;
+    font-size: 16px;
+    margin: 40px;
+        padding: 3em;
+    text-align: center;
+}
 /* .clearfix:after {
         visibility: hidden;
         display: block;
