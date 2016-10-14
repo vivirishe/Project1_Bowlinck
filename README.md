@@ -30,6 +30,8 @@ The first Unsolved problem is to add a loop to draw the pins.
 Second Unsolved problem is add spin to the ball.
 Third Unsolved problem is to add more players and keep the scores for tournament.
 
+To do list: replace hardcoding, substitute the alerts for maybe text or nice alerts, take a look on bootstrap for design.
+
 ###Links <br>
 <li>[Go to Bowlinck](https://vivirishe.github.io/Project1_Bowlinck/)</li>
 <li>
