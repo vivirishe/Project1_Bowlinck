@@ -20,7 +20,7 @@ This game is a version of digital Bowling, where you can move the ball to the ri
 
 	- Step 1: Clone the repository.
 
-	- Step 3: Open index.html in your browser.
+	- Step 2: Open index.html in your browser.
 
 ###Approach Taken <br>
 In this project, I used Canvas technology from HTML5, which it was something new, I had the chance to explore and play with it, I used it to draw the board and all the components (10 pins and the bowling ball). I used JavaScript for the win logic, jQuery for all the events and the DOM and CSS for the styling.
